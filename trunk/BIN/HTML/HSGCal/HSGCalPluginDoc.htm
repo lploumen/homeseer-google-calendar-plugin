@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Untitled Page</title>
+    <style>
+<!--
+.Normal      { font-family: Verdana; font-size: 12pt }
+.ScriptDesc  { font-family: Verdana; font-size: 12pt; color: #800080; text-align: left; 
+               margin-left: 1 }
+-->
+</style>
+</head>
+<body>
+    <p align="center"><strong style="color: navy; font-family: Verdana, Tahoma">
+    <font size="5">HomeSeer Google Calendar Plug-In Documentation</font></strong></p>
+    <p>&nbsp;</p>
+    <p><font face="Verdana">The HomeSeer/Google Calendar (HSGCal) plug-in is a 
+    .NET plug-in for HomeSeer that allows you to access one or more Google 
+    calendar accounts for purposes of reporting calendar events in HomeSeer.&nbsp; 
+    The plug-in does not provide any features for modifying calendar events, or 
+    for using the reminders within HomeSeer.&nbsp; Future enhancements to this 
+    plug-in may allow for several features such as these, so please provide 
+    feedback so that new features can be considered.</font></p>
+    <p><font face="Verdana"><b>OPERATION</b> </font></p>
+    <p><font face="Verdana">The plug-in provides a configuration page where you 
+    can enter Google account information as well as information on how far ahead 
+    and behind that calendar events should be retrieved for each user.&nbsp; If, 
+    for example, you retrieve a week's worth of appointments in the future, but 
+    your HomeSeer events only speak the current day's or the current day's and 
+    tomorrow's appointments, then data retrieval from Google will take longer 
+    than necessary.&nbsp; Thus, set the ahead and behind values to the amount 
+    that you will typically use in your HomeSeer events and scripts.</font></p>
+    <p><font face="Verdana">The plug-in will also refresh the list of events at 
+    the interval you specify - higher update intervals take more CPU power and 
+    cause more data to be downloaded via the Internet.&nbsp; Set this to a 
+    realistic value - update intervals of less than 10 minutes are not allowed.</font></p>
+    <p><font face="Verdana">Script commands exist to report events for a user 
+    based upon date ranges, or date ranges with times.&nbsp; When the time 
+    parameter is used, appointments that match the date but do not match the 
+    time will not be reported.&nbsp;&nbsp; Thus, you can choose to have HomeSeer 
+    provide to you a list of appointments (for example) at noon that includes 
+    all appointments for the day, or just the appointments remaining in the day 
+    - the appointments before noon would not be included.</font></p>
+    <p><b><font face="Verdana">There are currently no triggers, actions, or 
+    devices created by this plug-in - these will come in future releases.</font></b></p>
+    <p>&nbsp;</p>
+    <p><b><font face="Verdana">SCRIPTING</font></b></p>
+    <p><font face="Verdana">Writing scripts that make use of the data from this 
+    plug-in are currently only supported in VB.NET scripts - older VBS scripts 
+    will not be able to access the .NET plug-in object to make calls into it.</font></p>
+    <p><font face="Verdana">The following script commands are currently 
+    supported:</font></p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier; color: black">&nbsp;&nbsp;&nbsp;
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: blue">
+    Function</span><span style="font-size: 8.5pt; font-family: Courier; color: black"> 
+    GetEvents_DateOnly(ByVal User As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">String</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal Days As Integer) As GoogleCalendar.HSGCalEntry()</span></p>
+    <p style="text-autospace: none" class="ScriptDesc"><span class="normal">This 
+    function will retrieve calendar entries from the current date forward the 
+    number of days you specify in the Days parameter.&nbsp; The User parameter 
+    can be the calendar account email address OR the friendly name that you 
+    assigned that user when the account was added to the configuration page. The 
+    calendar events retrieved are those occurring on the starting date through 
+    all of the days beyond the starting date regardless of the appointment time.</span><span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">&nbsp;</p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier; color: black">&nbsp;&nbsp;&nbsp;
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: blue">
+    Function</span><span style="font-size: 8.5pt; font-family: Courier; color: black"> 
+    GetEventsSelect_DateOnly(ByVal User As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">String</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal StartDate As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">Date</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal Days As Integer) As GoogleCalendar.HSGCalEntry()</span></p>
+    <p style="text-autospace: none" class="ScriptDesc"><span class="normal">This 
+    function will retrieve calendar entries from the starting date that you 
+    specify in the StartDate parameter to the number of days you specify in the 
+    Days parameter.&nbsp; The User parameter can be the calendar account email 
+    address OR the friendly name that you assigned that user when the account 
+    was added to the configuration page.</span><span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span><span class="normal"> 
+    The calendar events retrieved are those occurring on the starting date 
+    through all of the days beyond the starting date regardless of the 
+    appointment time.</span></p>
+    <p class="MsoNormal" style="text-autospace: none">&nbsp;</p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier; color: black">&nbsp;&nbsp;&nbsp;
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: blue">
+    Function</span><span style="font-size: 8.5pt; font-family: Courier; color: black"> 
+    GetEventsRange_DateOnly(ByVal User As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">String</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal StartDate As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">Date</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal EndDate As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">Date</span><span style="font-size: 8.5pt; font-family: Courier; color: black">) 
+    As GoogleCalendar.HSGCalEntry()</span></p>
+    <p style="text-autospace: none" class="ScriptDesc"><span class="normal">This 
+    function will retrieve calendar entries from the starting date that you 
+    specify in the StartDate parameter to the date that you specify in the 
+    EndDate parameter inclusive.&nbsp; The User parameter can be the calendar 
+    account email address OR the friendly name that you assigned that user when 
+    the account was added to the configuration page.</span><span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span><span class="normal"> 
+    The calendar events retrieved are those occurring on the starting date 
+    through all of the days beyond the starting date regardless of the 
+    appointment time.</span></p>
+    <p class="MsoNormal" style="text-autospace: none">&nbsp;</p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier; color: black">&nbsp;&nbsp;&nbsp;
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: blue">
+    Function</span><span style="font-size: 8.5pt; font-family: Courier; color: black"> 
+    GetEvents_DateTime(ByVal User As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">String</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal Days As Integer) As GoogleCalendar.HSGCalEntry()</span></p>
+    <p style="text-autospace: none" class="ScriptDesc"><span class="normal">This 
+    function will retrieve calendar entries from the current date forward the 
+    number of days you specify in the Days parameter.&nbsp; The User parameter 
+    can be the calendar account email address OR the friendly name that you 
+    assigned that user when the account was added to the configuration page.&nbsp; 
+    The events retrieved must also fall within the time portion of the dates 
+    provided - in this case, if the current time is 11:00 AM, an appointment 
+    that took place at 9:00 AM will not appear in the results.</span><span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">&nbsp;</p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier; color: black">&nbsp;&nbsp;&nbsp;
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: blue">
+    Function</span><span style="font-size: 8.5pt; font-family: Courier; color: black"> 
+    GetEventsSelect_DateTime(ByVal User As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">String</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal StartDate As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">Date</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal Days As Integer) As GoogleCalendar.HSGCalEntry()</span></p>
+    <p style="text-autospace: none" class="ScriptDesc"><span class="normal">This 
+    function will retrieve calendar entries from the starting date that you 
+    specify in the StartDate parameter to the number of days you specify in the 
+    Days parameter.&nbsp; The User parameter can be the calendar account email 
+    address OR the friendly name that you assigned that user when the account 
+    was added to the configuration page.&nbsp; The events retrieved must also 
+    fall within the time portion of the dates provided - in this case, if you 
+    provide Now() as the StartDate and the current time is 11:00 AM, an 
+    appointment that took place at 9:00 AM will not appear in the results.</span><span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">&nbsp;</p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier; color: black">&nbsp;&nbsp;&nbsp;
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: blue">
+    Function</span><span style="font-size: 8.5pt; font-family: Courier; color: black"> 
+    GetEventsRange_DateTime(ByVal User As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">String</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal StartDate As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">Date</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal EndDate As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">Date</span><span style="font-size: 8.5pt; font-family: Courier; color: black">) 
+    As GoogleCalendar.HSGCalEntry()</span></p>
+    <p style="text-autospace: none" class="ScriptDesc"><span class="normal">This 
+    function will retrieve calendar entries from the starting date that you 
+    specify in the StartDate parameter to the date that you specify in the 
+    EndDate parameter inclusive.&nbsp; The User parameter can be the calendar 
+    account email address OR the friendly name that you assigned that user when 
+    the account was added to the configuration page.&nbsp; The events retrieved 
+    must also fall within the time portion of the dates provided - in this case, 
+    if the starting date has a time parameter of 11:00 AM and the ending date a 
+    week later has a time parameter of 5:00 PM, then appointments before 11:00 
+    AM on the starting date or after 5:00 PM on the ending date will not be 
+    included in the results.</span><span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">&nbsp;</p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier; color: black">&nbsp;&nbsp;&nbsp;
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: blue">Sub</span><span style="font-size: 8.5pt; font-family: Courier; color: black"> 
+    UpdateNow()</span></p>
+    <p style="text-autospace: none" class="ScriptDesc"><span class="normal">This 
+    procedure will flush the current calendar entries for all users and 
+    re-retrieve them from Google using the Days Forward and Days Backward 
+    settings in the configuration.&nbsp; This can be used in a couple of ways: 
+    1) If your regular update interval is set to 60 minutes, but you just 
+    entered an appointment in your Google calendar that you wish to be available 
+    to HomeSeer, then this command will force the update to take place earlier, 
+    or 2) If you used the Fetch command to retrieve more or less events than is 
+    normally available, forcing an update will reset the calendar events to the 
+    events retrieved based upon the number of days ahead and behind that were 
+    set in the configuration.</span></p>
+    <p class="MsoNormal" style="text-autospace: none">&nbsp;</p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier; color: black">&nbsp;&nbsp;&nbsp;
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: blue">
+    Function</span><span style="font-size: 8.5pt; font-family: Courier; color: black"> 
+    Fetch(ByVal User As </span>
+    <span style="font-size: 8.5pt; font-family: Courier; color: blue">String</span><span style="font-size: 8.5pt; font-family: Courier; color: black">, 
+    ByVal DaysForward As Integer, Optional ByVal DaysBackward As Integer =
+    </span><span style="font-size: 8.5pt; font-family: Courier; color: maroon">0</span><span style="font-size: 8.5pt; font-family: Courier; color: black">) 
+    As Boolean</span></p>
+    <p style="text-autospace: none" class="ScriptDesc">This function will return 
+    a Boolean (True/False) indicating success in retrieving the specified number 
+    of days ahead or behind for a given calendar user.&nbsp; This is useful for 
+    ad-hoc reporting that is outside the limits of what is normally retrieved by 
+    the plug-in.&nbsp; If you are about to travel and wish to take a HomeSeer 
+    generated list of appointments with you for the entire month, but the 
+    plug-in is configured to only retrieve a few days' appointments at a time, 
+    call this command in your report script to retrieve a month's worth of 
+    records.&nbsp; All of the commands that access the calendar records will 
+    then have a month's worth of data until the next regularly scheduled update 
+    occurs.&nbsp; If your regular update interval is 30 minutes, then after 
+    calling 'Fetch' you will have 30 minutes before the next update resets the 
+    data to the shorter number of days retrieved.</p>
+    <p class="MsoNormal" style="text-autospace: none">&nbsp;</p>
+    <p class="MsoNormal" style="text-autospace: none">
+    <span style="font-size: 8.5pt; font-family: Courier">&nbsp;</span></p>
+    <p style="text-autospace: none"><b>HSGCalEntry</b></p>
+    <p class="ScriptDesc" style="text-autospace: none">Most of the script 
+    commands return an array of this object type.&nbsp; The properties contained 
+    within this object are described next:</p>
+    <table border="1" cellpadding="2" bordercolorlight="#C0C0C0" bordercolordark="#000080" width="100%" bordercolor="#FFFF00" id="table1">
+      <tr>
+        <td align="center">
+        <h3>Property</h3>
+        </td>
+        <td align="center">
+        <h3>Type</h3>
+        </td>
+        <td align="center">
+        <h3>Description</h3>
+        </td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">GoogleEntry</font></td>
+        <td><font face="Verdana">Google.GData.Calendar.EventEntry</font></td>
+        <td><font face="Verdana">For developers familiar with the Google Data 
+        API, this provides direct access to the EventEntry object.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">User</font></td>
+        <td><font face="Verdana">GoogleCalendar.UserPair</font></td>
+        <td><font face="Verdana">The UserPair object contains identifying 
+        information about the Google account that this calendar entry came from.&nbsp; 
+        Properties of the UserPair object include: UserName (String) - the 
+        account email address, FriendlyName (String) - the account friendly name 
+        assigned in the plug-in configuration screen.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Title</font></td>
+        <td><font face="Verdana">String</font></td>
+        <td><font face="Verdana">The appointment/event title or subject with 
+        HTML removed.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">TitleHTML</font></td>
+        <td><font face="Verdana">String</font></td>
+        <td><font face="Verdana">The appointment/event title or subject without 
+        any HTML removed. (Most entries are without HTML anyway)</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Author</font></td>
+        <td><font face="Verdana">String</font></td>
+        <td><font face="Verdana">The user ID of the person who authored the 
+        appointment (their Google account email address)</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Category</font></td>
+        <td><font face="Verdana">String Array</font></td>
+        <td><font face="Verdana">The categories assigned to this event.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">CategoryList</font></td>
+        <td><font face="Verdana">String</font></td>
+        <td><font face="Verdana">The categories assigned to this event separated 
+        by a comma.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Description</font></td>
+        <td><font face="Verdana">String</font></td>
+        <td><font face="Verdana">The more detailed description associated with 
+        the event.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">EventLink</font></td>
+        <td><font face="Verdana">String</font></td>
+        <td><font face="Verdana">The http formatted link to the event details.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Status</font></td>
+        <td><font face="Verdana">Google.GData.Calendar.EventEntry.EventStatus</font></td>
+        <td><font face="Verdana">The Google EventStatus Enum</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">StatusText</font></td>
+        <td><font face="Verdana">String</font></td>
+        <td><font face="Verdana">The event status as a string: Canceled, 
+        Confirmed, Tentative, or (Unknown)</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">FreeBusy</font></td>
+        <td><font face="Verdana">enum FreeBusy</font></td>
+        <td><font face="Verdana">An Enum return indicating the Free/Busy state 
+        for the event, consisting of the values: Free (Value 1), Busy (Value 2) 
+        or Undefined (Value 3)&nbsp; Returning this value to a string will force 
+        the conversion to a string value, returning to an integer will force a 
+        conversion to a numeric value.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Visibility</font></td>
+        <td><font face="Verdana">enum Visibility</font></td>
+        <td><font face="Verdana">An Enum return indicating the 
+        visibility/security for the event, consisting of the values: vDefault 
+        (Value 1), vConfidential (Value 2), vPrivate (Value 3), vPublic (Value 
+        4), and vUnknown (Value 5).&nbsp; Returning this value to a string will 
+        force the conversion to a string value, returning to an integer will 
+        force a conversion to a numeric value.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">StartDT</font></td>
+        <td><font face="Verdana">Date</font></td>
+        <td><font face="Verdana">The event start date/time.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">EndDT</font></td>
+        <td><font face="Verdana">Date</font></td>
+        <td><font face="Verdana">The event ending date/time.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Reminders</font></td>
+        <td><font face="Verdana">Remind object Array</font></td>
+        <td><font face="Verdana">This returns an array of the object type 
+        Remind.&nbsp; The Remind object consists of these properties: RemindWhen 
+        which is a TimeSpan, and RemindMethod which is an enum enumRemindMethod.&nbsp; 
+        The RemindWhen timespan indicates the amount of time before the 
+        appointment for the reminder as a timespan.&nbsp; The RemindMethod enum 
+        consists of the following entries: All (Value 1), Alert (Value 2), eMail 
+        (Value 3), SMS (Value 4), None (Value 5), and Unspecified (Value 6).&nbsp; 
+        Each object in the array indicates a different reminder set on this 
+        event.&nbsp; Returning the RemindMethod value to a string will force the 
+        conversion to a string value, returning to an integer will force a 
+        conversion to a numeric value.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Location</font></td>
+        <td><font face="Verdana">String</font></td>
+        <td><font face="Verdana">The location information from the event.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">Attendees</font></td>
+        <td><font face="Verdana">GCalAttendee object Array</font></td>
+        <td><font face="Verdana">This returns an array of the object type 
+        GCalAttendee.&nbsp; The GCalAttendee object consists of these 
+        properties: eMail, which is a string indicating the email address of the 
+        event attendee.&nbsp; Type, which is an enum AttendeeType, and Status 
+        which is an enum AttendeeStatus.&nbsp; The AttendeeType enum consists of 
+        the following items: AttendanceOptional (Value 1), AttendanceRequired 
+        (Value 2), and Undefined (Value 9).&nbsp; The AttendeeStatus enum 
+        consists of the following items: Accepted (Value 1), Declined (Value 2), 
+        Invited (Value 3), Tentative (Value 4) and Undefined (Value 9).&nbsp; 
+        Returning the enum properties to a string will force the conversion to a 
+        string value, returning to an integer will force a conversion to a 
+        numeric value.</font></td>
+      </tr>
+      <tr>
+        <td><font face="Verdana">AttendeesFilt</font></td>
+        <td><font face="Verdana">GCalAttendee object Arrray</font></td>
+        <td><font face="Verdana">This is the same as the Attendees property 
+        except that the record for the calendar owner is removed from the list.&nbsp; 
+        If the object array returned is 'Nothing', then there are no attendees 
+        other than the calendar owner.</font></td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+    </table>
+    <p class="ScriptDesc" style="text-autospace: none">&nbsp;</p>
+    <p style="text-autospace: none"><b><font face="Verdana">Sample Script</font></b></p>
+
+</body>
+</html>
