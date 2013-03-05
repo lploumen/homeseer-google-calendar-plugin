@@ -78,7 +78,7 @@ Module Module1
             End If
         End If
 
-        CreateDevices()
+        'CreateDevices()
 
     End Sub
 
@@ -256,7 +256,9 @@ GetNewHC:
         Dim dev_code As Short
 		Dim DE As Object
 		On Error Resume Next
-		
+
+        Return ' lpl simply don't process this function
+
 		
         ' First, check to see if our devices are created already...
         '   EnumerateDevices was called earlier, so colBaseCodes would be populated if there are devices.
@@ -281,26 +283,28 @@ GetNewHC:
         Else
             dev_code = 1
         End If
+        dv = hs.GetDevice(index)
+        ' lpl removed acme devices...
 
         ' create one device to represent the global panel status, such as armed, etc.
-        If InterfaceVersion < 3 Then
-            index = hs.NewDevice("Acme Panel Status")
-            dv = hs.GetDevice(index)
-        Else
-            lIndex = hs.NewDeviceRef("Acme Panel Status")
-            dv = hs.GetDeviceByRef(lIndex)
-        End If
-        dv.location = IFACE_NAME
-        dv.hc = gBaseCode
-        dv.dc = dev_code.ToString
-        dv.interface = IFACE_NAME
-        dv.misc = 0 ' On/Off only, no dim
-        dv.dev_type_string = "Panel Status"
-        dv.iotype = IOTYPE_CONTROL
+        'If InterfaceVersion < 3 Then
+        ' index = hs.NewDevice("Acme Panel Status")
+        'dv = hs.GetDevice(index)
+        'Else
+        'lIndex = hs.NewDeviceRef("Acme Panel Status")
+        'dv = hs.GetDeviceByRef(lIndex)
+        'End If
+        'dv.location = IFACE_NAME
+        'dv.hc = gBaseCode
+        'dv.dc = dev_code.ToString
+        'dv.interface = IFACE_NAME
+        'dv.misc = 0 ' On/Off only, no dim
+        'dv.dev_type_string = "Panel Status"
+        'dv.iotype = IOTYPE_CONTROL
         ' add 2 buttons to this device
-        dv.buttons = IFACE_NAME & Chr(2) & "Arm" & Chr(1) & IFACE_NAME & Chr(2) & "Disarm"
+        'dv.buttons = IFACE_NAME & Chr(2) & "Arm" & Chr(1) & IFACE_NAME & Chr(2) & "Disarm"
         ' set a default status for this device to a string saying we are not connected to the panel
-        hs.SetDeviceString(dv.hc & dv.dc, "No Connection")
+        ' hs.SetDeviceString(dv.hc & dv.dc, "No Connection")
         dev_code += 1
         For i = 1 To 5
             ' this is a good place to actually assign the real zone names
