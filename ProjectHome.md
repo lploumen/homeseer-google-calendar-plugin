@@ -1,0 +1,1 @@
+Homeseer google calendar plugin. Allows Homeseer to access google calendar and retrieve events and appointments.
